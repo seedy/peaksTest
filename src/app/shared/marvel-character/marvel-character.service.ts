@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import {Http} from '@angular/http';
+import {Http, URLSearchParams} from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 
 import { marvelKeys } from 'secret/marvel-keys';
 
-import { Observable } from 'rxjs/Observable';
 import {MarvelCharacter} from './marvel-character';
 
 @Injectable()
@@ -15,10 +16,16 @@ export class MarvelCharacterService {
     private http: Http
   ) { }
 
-  getList(index?: number, number?:number): MarvelCharacter[] {
+  getList(index?: number, number?:number): Observable<MarvelCharacter[]> {
+    let params: URLSearchParams = new URLSearchParams();
+    params.set('apikey', marvelKeys.apikey);
+    params.set('orderBy', 'name');
+    params.set('offset', index.toString());
+    params.set('limit', number.toString());
 
     return this.http
-      .get(api, { params:  })
+      .get(this.api, { params: params})
+      .map((response) => response.json().data as MarvelCharacter[])
   }
 
 }
