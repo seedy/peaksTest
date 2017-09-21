@@ -16,7 +16,7 @@ export class MarvelCharacterService {
     private http: Http
   ) { }
 
-  getList(index?: number, number?:number): Observable<MarvelCharacter[]> {
+  getList(index?: number, number?:number): Observable<any> {
     let params: URLSearchParams = new URLSearchParams();
     params.set('apikey', marvelKeys.apikey);
     params.set('orderBy', 'name');
@@ -25,7 +25,13 @@ export class MarvelCharacterService {
 
     return this.http
       .get(this.api, { params: params})
-      .map((response) => response.json().data as MarvelCharacter[])
+      .map((response) => {
+        let data = response.json().data;
+        data.results = response.json().data.results
+          .map((result) =>
+            new MarvelCharacter(result.id, result.name, result.description, result.thumbnail, result.comics.items));
+        return data;
+      });
   }
 
 }

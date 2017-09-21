@@ -3,7 +3,7 @@ import { BrowserModule }  from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import {
   MdListModule, MdButtonModule, MdToolbarModule, MdProgressSpinnerModule,
-  MdPaginatorModule
+  MdPaginatorModule, MdDialogModule, MdIconModule
 } from '@angular/material';
 import {FlexLayoutModule} from '@angular/flex-layout';
 
@@ -31,12 +31,15 @@ import {MarvelCharacterService} from '../shared/marvel-character/marvel-characte
     CommonModule,
     BrowserModule,
     CoreRoutingModule,
-    MdListModule, MdButtonModule, MdToolbarModule, MdProgressSpinnerModule, MdPaginatorModule,
+    MdListModule, MdIconModule, MdButtonModule, MdToolbarModule, MdProgressSpinnerModule, MdPaginatorModule, MdDialogModule,
     FlexLayoutModule
   ],
   exports: [
     HomeComponent,
     NavbarComponent
+  ],
+  entryComponents: [
+    CharDetailComponent
   ]
 })
 export class CoreModule { }

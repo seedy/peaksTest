@@ -1,0 +1,17 @@
+<div class="u-fixed-height" fxLayout="column" fxLayoutAlign="center center">
+  <md-spinner *ngIf="isLoading"></md-spinner>
+  <md-list *ngIf="!isLoading" fxLayout="row" fxLayoutWrap>
+    <md-list-item class="char-item" *ngFor="let character of characters" fxLayout="row" fxLayoutAlign="start center" fxFlex="25%">
+      <span mdListAvatar class="char-avatar">
+        <img [src]="character.img.small" alt="character.name" />
+      </span>
+      <h4 mdLine class="char-name" (click)="showDetail(character)">{{character.name}}</h4>
+    </md-list-item>
+  </md-list>
+</div>
+<div>
+  <md-paginator [pageIndex]="pagination.index" [length]="pagination.total" [pageSize]="pagination.limit" (page)="loadCharacters($event.pageIndex, $event.pageSize)"></md-paginator>
+</div>
+<footer>
+  <p>Data provided by Marvel. © 2014 Marvel</p>
+</footer>

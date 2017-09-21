@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Inject} from '@angular/core';
+import { MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
+import {MarvelCharacter} from '../../shared/marvel-character/marvel-character';
 
 @Component({
   selector: 'pt-char-detail',
@@ -7,9 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CharDetailComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public dialogRef: MdDialogRef<CharDetailComponent>,
+    @Inject(MD_DIALOG_DATA) public data: MarvelCharacter
+  ) { }
 
   ngOnInit() {
+
   }
 
 }
