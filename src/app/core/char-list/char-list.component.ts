@@ -22,7 +22,7 @@ export class CharListComponent implements OnInit {
     total: 0
   };
 
-  favorites = 0;
+  favorites = [];
 
   constructor(
     private marvelCharacterService: MarvelCharacterService,
@@ -32,6 +32,7 @@ export class CharListComponent implements OnInit {
 
   ngOnInit() {
     this.loadCharacters(this.pagination.index, this.pagination.limit);
+    this.observeFavorites();
   }
 
   loadCharacters(index: number, number: number): void {
@@ -45,7 +46,11 @@ export class CharListComponent implements OnInit {
           index: data.offset / data.limit,
           total: data.total
         };
-        this.characters = data.results;
+        this.characters = data.results
+          .map((character: MarvelCharacter) => {
+            character.favorite = this.favorites.some((fav) => fav.id === character.id);
+            return character;
+          });
         this.isLoading = false;
       });
   }
@@ -56,14 +61,8 @@ export class CharListComponent implements OnInit {
     });
   }
 
-  onFav(state: boolean): void {
-    if(state){
-      this.favorites++;
-    } else {
-      this.favorites--;
-    }
+  observeFavorites(): void {
+    this.favoriteCounter.counterControl$.subscribe((list) => this.favorites = list);
   }
-
-
 
 }

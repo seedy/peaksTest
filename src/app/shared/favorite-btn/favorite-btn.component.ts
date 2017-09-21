@@ -23,7 +23,7 @@ export class FavoriteBtnComponent implements OnInit {
       return;
     }
     char.favorite = !char.favorite;
-    this.favoriteCounter.onFavorite(char.favorite);
+    this.favoriteCounter.onFavorite(char);
   }
 
 }
