@@ -6,7 +6,7 @@
         <img [src]="character.img.small" alt="character.name" />
       </span>
       <h4 mdLine class="char-name" (click)="showDetail(character)">{{character.name}}</h4>
-      <pt-favorite-btn [current]="favorites" [max]="maxFav" [character]="character" (onChange)="onFav($event)"></pt-favorite-btn>
+      <pt-favorite-btn mdLine [character]="character"></pt-favorite-btn>
     </md-list-item>
   </md-list>
 </div>
@@ -14,5 +14,5 @@
   <md-paginator [pageIndex]="pagination.index" [length]="pagination.total" [pageSize]="pagination.limit" (page)="loadCharacters($event.pageIndex, $event.pageSize)"></md-paginator>
 </div>
 <footer>
-  <p>Data provided by Marvel. © 2014 Marvel</p>
+  <span>Data provided by Marvel. © 2014 Marvel</span>
 </footer>

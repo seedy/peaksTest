@@ -4,6 +4,7 @@ import {Subject} from 'rxjs/Subject';
 import {MarvelCharacterService} from '../../shared/marvel-character/marvel-character.service';
 import {MarvelCharacter} from '../../shared/marvel-character/marvel-character';
 import {CharDetailComponent} from '../char-detail/char-detail.component';
+import {FavoriteCounterService} from '../favorite-counter/favorite-counter.service';
 
 @Component({
   selector: 'pt-char-list',
@@ -22,11 +23,11 @@ export class CharListComponent implements OnInit {
   };
 
   favorites = 0;
-  maxFav = 5;
 
   constructor(
     private marvelCharacterService: MarvelCharacterService,
-    private dialog: MdDialog
+    private dialog: MdDialog,
+    private favoriteCounter: FavoriteCounterService
   ) { }
 
   ngOnInit() {
