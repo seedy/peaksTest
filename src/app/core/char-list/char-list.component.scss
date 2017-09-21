@@ -7,6 +7,10 @@
   overflow: hidden;
   text-overflow: ellipsis;
 
+  &.primary {
+    color: gold;
+  }
+
   .char-avatar {
     height: 60px;
     width: 60px;

@@ -11,11 +11,12 @@ export class CharDetailComponent implements OnInit {
 
   constructor(
     public dialogRef: MdDialogRef<CharDetailComponent>,
-    @Inject(MD_DIALOG_DATA) public data: MarvelCharacter
+    @Inject(MD_DIALOG_DATA) public data: { character: MarvelCharacter }
   ) { }
 
   ngOnInit() {
 
   }
+
 
 }

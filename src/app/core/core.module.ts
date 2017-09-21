@@ -8,6 +8,7 @@ import {
 import {FlexLayoutModule} from '@angular/flex-layout';
 
 import {CoreRoutingModule} from './core-routing.module';
+import {SharedModule} from '../shared/shared.module';
 
 import {CharDetailComponent} from './char-detail/char-detail.component';
 import {CharListComponent} from './char-list/char-list.component';
@@ -31,6 +32,7 @@ import {MarvelCharacterService} from '../shared/marvel-character/marvel-characte
     CommonModule,
     BrowserModule,
     CoreRoutingModule,
+    SharedModule,
     MdListModule, MdIconModule, MdButtonModule, MdToolbarModule, MdProgressSpinnerModule, MdPaginatorModule, MdDialogModule,
     FlexLayoutModule
   ],
