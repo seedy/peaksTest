@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {MarvelCharacterService} from '../../shared/marvel-character/marvel-character.service';
 import {MarvelCharacter} from '../../shared/marvel-character/marvel-character';
+import {MdDialog} from '@angular/material';
+import {CharDetailComponent} from '../char-detail/char-detail.component';
 
 @Component({
   selector: 'pt-char-list',
@@ -18,7 +20,8 @@ export class CharListComponent implements OnInit {
     total: 0
   };
   constructor(
-    private marvelCharacterService: MarvelCharacterService
+    private marvelCharacterService: MarvelCharacterService,
+    private dialog: MdDialog
   ) { }
 
   ngOnInit() {
@@ -42,7 +45,9 @@ export class CharListComponent implements OnInit {
   }
 
   showDetail(char: MarvelCharacter): void {
-    // show detail
+    let dialogRef = this.dialog.open(CharDetailComponent, {
+      data: char
+    });
   }
 
 }

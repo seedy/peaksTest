@@ -1,3 +1,18 @@
-<p>
-  char-detail works!
-</p>
+<h1 md-dialog-title class="detail-title">{{data.name}}</h1>
+<div md-dialog-content class="detail-content" fxLayout="column" fxLayoutAlign="center center">
+  <img [src]="data.img.xlarge" alt="data.name" />
+  <span fxLayout="row">
+    <span>Appears in <span class="u-important">{{data.comics.length}}</span> comics</span>
+    <span *ngIf="data.comics.length > 0">&nbsp;such as :</span>
+  </span>
+  <md-list *ngIf="data.comics.length > 0">
+    <md-list-item *ngFor="let comic of (data.comics ? data.comics.slice(0,3) : [])">
+      <md-icon mdListIcon>chrome_reader_mode</md-icon>
+      <h5 mdLine>{{comic.title}}</h5>
+    </md-list-item>
+  </md-list>
+  <p>{{data.description || 'No Description available'}}</p>
+</div>
+<div md-dialog-actions fxLayout="row" fxLayoutAlign="center end">
+  <button md-button [md-dialog-close]>Close</button>
+</div>
