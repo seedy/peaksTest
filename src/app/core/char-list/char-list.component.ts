@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import {MdDialog} from '@angular/material';
+import {Subject} from 'rxjs/Subject';
 import {MarvelCharacterService} from '../../shared/marvel-character/marvel-character.service';
 import {MarvelCharacter} from '../../shared/marvel-character/marvel-character';
-import {MdDialog} from '@angular/material';
 import {CharDetailComponent} from '../char-detail/char-detail.component';
 
 @Component({
@@ -19,6 +20,10 @@ export class CharListComponent implements OnInit {
     index: 5,
     total: 0
   };
+
+  favorites = 0;
+  maxFav = 5;
+
   constructor(
     private marvelCharacterService: MarvelCharacterService,
     private dialog: MdDialog
@@ -49,5 +54,15 @@ export class CharListComponent implements OnInit {
       data: char
     });
   }
+
+  onFav(state: boolean): void {
+    if(state){
+      this.favorites++;
+    } else {
+      this.favorites--;
+    }
+  }
+
+
 
 }

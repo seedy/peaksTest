@@ -1,4 +1,7 @@
-<h1 md-dialog-title class="detail-title">{{data.name}}</h1>
+<h1 md-dialog-title class="detail-title">
+  <span>{{data.name}}</span>
+  <md-icon *ngIf="data.favorite">favorite</md-icon>
+</h1>
 <div md-dialog-content class="detail-content" fxLayout="column" fxLayoutAlign="center center">
   <img [src]="data.img.xlarge" alt="data.name" />
   <span fxLayout="row">
