@@ -1,5 +1,5 @@
 export class MarvelComic {
   constructor(
-    title: string
+    public title: string
   ) {}
 }
