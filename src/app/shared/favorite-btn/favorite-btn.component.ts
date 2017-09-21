@@ -1,5 +1,6 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {MarvelCharacter} from '../marvel-character/marvel-character';
+import {FavoriteCounterService} from '../../core/favorite-counter/favorite-counter.service';
 
 @Component({
   selector: 'pt-favorite-btn',
@@ -9,21 +10,20 @@ import {MarvelCharacter} from '../marvel-character/marvel-character';
 export class FavoriteBtnComponent implements OnInit {
 
   @Input() character: MarvelCharacter;
-  @Input() current: number;
-  @Input() max: number;
-  @Output() onChange = new EventEmitter<boolean>();
 
-  constructor() { }
+  constructor(
+    private favoriteCounter: FavoriteCounterService
+  ) { }
 
   ngOnInit() {
   }
 
   toggleFavorite(char: MarvelCharacter): void {
-    if(!char.favorite && this.current === this.max) {
+    if(!this.favoriteCounter.canFavorite() && !char.favorite) {
       return;
     }
     char.favorite = !char.favorite;
-    return this.onChange.emit(char.favorite);
+    this.favoriteCounter.onFavorite(char);
   }
 
 }

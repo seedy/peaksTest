@@ -4,6 +4,7 @@ import {Subject} from 'rxjs/Subject';
 import {MarvelCharacterService} from '../../shared/marvel-character/marvel-character.service';
 import {MarvelCharacter} from '../../shared/marvel-character/marvel-character';
 import {CharDetailComponent} from '../char-detail/char-detail.component';
+import {FavoriteCounterService} from '../favorite-counter/favorite-counter.service';
 
 @Component({
   selector: 'pt-char-list',
@@ -21,16 +22,17 @@ export class CharListComponent implements OnInit {
     total: 0
   };
 
-  favorites = 0;
-  maxFav = 5;
+  favorites = [];
 
   constructor(
     private marvelCharacterService: MarvelCharacterService,
-    private dialog: MdDialog
+    private dialog: MdDialog,
+    private favoriteCounter: FavoriteCounterService
   ) { }
 
   ngOnInit() {
     this.loadCharacters(this.pagination.index, this.pagination.limit);
+    this.observeFavorites();
   }
 
   loadCharacters(index: number, number: number): void {
@@ -44,7 +46,11 @@ export class CharListComponent implements OnInit {
           index: data.offset / data.limit,
           total: data.total
         };
-        this.characters = data.results;
+        this.characters = data.results
+          .map((character: MarvelCharacter) => {
+            character.favorite = this.favorites.some((fav) => fav.id === character.id);
+            return character;
+          });
         this.isLoading = false;
       });
   }
@@ -55,14 +61,8 @@ export class CharListComponent implements OnInit {
     });
   }
 
-  onFav(state: boolean): void {
-    if(state){
-      this.favorites++;
-    } else {
-      this.favorites--;
-    }
+  observeFavorites(): void {
+    this.favoriteCounter.counterControl$.subscribe((list) => this.favorites = list);
   }
-
-
 
 }
