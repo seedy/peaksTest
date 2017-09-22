@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import {MarvelCharacter} from '../marvel-character/marvel-character';
 import {FavoriteCounterService} from '../../core/favorite-counter/favorite-counter.service';
 
@@ -18,12 +18,12 @@ export class FavoriteBtnComponent implements OnInit {
   ngOnInit() {
   }
 
-  toggleFavorite(char: MarvelCharacter): void {
-    if(!this.favoriteCounter.canFavorite() && !char.favorite) {
+  toggleFavorite(): void {
+    if(!this.favoriteCounter.canFavorite() && !this.character.favorite) {
       return;
     }
-    char.favorite = !char.favorite;
-    this.favoriteCounter.onFavorite(char);
+    this.character.favorite = !this.character.favorite;
+    this.favoriteCounter.onFavorite(this.character);
   }
 
 }
