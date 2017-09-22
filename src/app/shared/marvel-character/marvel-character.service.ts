@@ -3,9 +3,8 @@ import {Http, URLSearchParams} from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
-import { marvelKeys } from 'secret/marvel-keys';
-
 import {MarvelCharacter} from './marvel-character';
+import {marvelKeys} from '../../../../secret/marvel-keys';
 
 @Injectable()
 export class MarvelCharacterService {
